@@ -1,3 +1,4 @@
+var styles = "";
 document.addEventListener("DOMContentLoaded", () => {
   const adsContainers = document.querySelectorAll(".codions-ads");
   const currentDateTime = new Date();
