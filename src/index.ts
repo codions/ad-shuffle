@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const weightedAds: HTMLElement[] = [];
         let totalWeight = 0;
 
+        // Define auto-rotation behavior and interval
+        const autoRotate = adsContainer.getAttribute('data-auto-rotate') === 'true';
+        const interval = parseInt(adsContainer.getAttribute('data-interval') || '0', 10) * 1000; // Convert to milliseconds
+
+        // Filter valid ads based on dates and frequency
         ads.forEach(ad => {
             const startDate = ad.getAttribute('data-start-date') ? new Date(ad.getAttribute('data-start-date')!) : null;
             const endDate = ad.getAttribute('data-end-date') ? new Date(ad.getAttribute('data-end-date')!) : null;
@@ -28,13 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
             return; // No ads to display
         }
 
-        const randomIndex = Math.floor(Math.random() * totalWeight);
-        const selectedAd = weightedAds[randomIndex];
+        const selectRandomAd = () => {
+            const randomIndex = Math.floor(Math.random() * totalWeight);
+            const selectedAd = weightedAds[randomIndex];
 
-        ads.forEach(ad => {
-            ad.style.display = 'none';
-        });
+            // Hide all ads and display the selected one
+            ads.forEach(ad => {
+                ad.style.display = 'none';
+            });
 
-        selectedAd.style.display = 'block';
+            selectedAd.style.display = 'block';
+        };
+
+        // Display the initial ad
+        selectRandomAd();
+
+        // If auto-rotation is enabled, set up the interval
+        if (autoRotate && interval > 0) {
+            setInterval(selectRandomAd, interval);
+        }
     });
 });

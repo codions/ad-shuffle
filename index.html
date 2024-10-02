@@ -4,48 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdShuffle - Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <script src="dist/ad-shuffle.es.js"></script>
 </head>
-<body>
-    <div class="rb-ads">
-        <div class="rb-random-ads ads-styled" data-frequency="50" data-start-date="2024-09-09 09:31:00" data-end-date="2024-10-10 12:35:00">
-            <div class="ads-info">Publicidade</div>
-            Banner 1 - Frequência 50% (2024-09-09 12:35:00 - 2024-09-10 12:35:00)
+<body class="bg-gray-100 text-gray-800 font-sans">
+    <header class="bg-blue-600 text-white py-6">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold">AdShuffle - Demo</h1>
+            <p class="mt-2 text-lg">A JavaScript package for random banner rotation with frequency and date control.</p>
+            <a href="https://github.com/codions/ad-shuffle" class="mt-4 inline-block text-blue-100 hover:text-white underline">View on GitHub</a>
         </div>
-        <div class="rb-random-ads ads-styled" data-frequency="25" data-end-date="2024-09-09 13:00:00">
-            <div class="ads-info">Publicidade</div>
-            Banner 2 - Frequência 25% (End 2024-09-09 13:00:00)
-        </div>
-        <div class="rb-random-ads ads-styled" data-frequency="25" data-start-date="2024-09-01 00:00:00">
-            <div class="ads-info">Publicidade</div>
-            Banner 3 - Frequência 25% (Start 2024-09-01 00:00:00)
-        </div>
-    </div>
+    </header>
 
-    <div class="rb-ads">
-        <div class="rb-random-ads ads-styled" data-frequency="25" data-start-date="2024-09-10 00:00:00">
-            <div class="ads-info">Publicidade</div>
-            Banner 4 - Frequência 25% (Start 2024-09-10 00:00:00)
-        </div>
-        <div class="rb-random-ads ads-styled" data-frequency="75">
-            <div class="ads-info">Publicidade</div>
-            Banner 5 - Frequência 75%
-        </div>
-    </div>
+    <main class="container mx-auto my-10">
+        <!-- Introduction Section -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold">About AdShuffle</h2>
+            <p class="mt-4">AdShuffle allows you to manage banner rotation based on frequency and date range settings. You can also enable automatic rotation with a set interval. Below are examples showcasing different cases and configurations.</p>
+        </section>
 
-    <div class="rb-ads">
-        <div class="rb-random-ads ads-styled" data-frequency="33">
-            <div class="ads-info">Publicidade</div>
-            Banner 6 - Frequência 33%
+        <!-- Script Inclusion Section -->
+        <section class="mb-8 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold">How to Add AdShuffle to Your Page</h2>
+            <p class="mt-4">To use AdShuffle on your website, simply add the following script tag to your HTML file:</p>
+            <pre class="bg-gray-800 text-white p-4 rounded-lg">
+&lt;script src="https://ad-shuffle.codions.dev/dist/ad-shuffle.es.js"&gt;&lt;/script&gt;
+            </pre>
+            <p class="mt-4">This script will enable the functionality of banner rotation, allowing you to define banners with frequencies, start and end dates, and more.</p>
+        </section>
+
+        <!-- Example with Auto-Rotation -->
+        <section class="mb-8">
+            <h3 class="text-xl font-semibold">Example 1: Auto-Rotation Every 5 Seconds</h3>
+            <p class="mb-4">This container rotates banners automatically every 5 seconds, respecting the defined frequencies and date ranges.</p>
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <div class="rb-ads" data-auto-rotate="true" data-interval="5">
+                    <div class="rb-random-ads ads-styled" data-frequency="50" data-start-date="2024-09-09 09:31:00" data-end-date="2026-10-10 12:35:00">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 1 - Frequency 50% (2024-09-09 to 2026-10-10)
+                    </div>
+                    <div class="rb-random-ads ads-styled" data-frequency="25" data-end-date="2026-09-09 13:00:00">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 2 - Frequency 25% (Ends 2026-09-09)
+                    </div>
+                    <div class="rb-random-ads ads-styled" data-frequency="25" data-start-date="2024-09-01 00:00:00">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 3 - Frequency 25% (Starts 2024-09-01)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example without Auto-Rotation -->
+        <section class="mb-8">
+            <h3 class="text-xl font-semibold">Example 2: No Auto-Rotation (Random Initial Selection)</h3>
+            <p class="mb-4">This container selects a random banner initially, based on the defined frequencies, but does not rotate automatically.</p>
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <div class="rb-ads">
+                    <div class="rb-random-ads ads-styled" data-frequency="25" data-start-date="2024-09-10 00:00:00">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 4 - Frequency 25% (Starts 2024-09-10)
+                    </div>
+                    <div class="rb-random-ads ads-styled" data-frequency="75">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 5 - Frequency 75%
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example with Equal Frequencies -->
+        <section class="mb-8">
+            <h3 class="text-xl font-semibold">Example 3: Equal Frequencies</h3>
+            <p class="mb-4">This container displays banners with equal frequencies (33%).</p>
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <div class="rb-ads">
+                    <div class="rb-random-ads ads-styled" data-frequency="33">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 6 - Frequency 33%
+                    </div>
+                    <div class="rb-random-ads ads-styled" data-frequency="33">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 7 - Frequency 33%
+                    </div>
+                    <div class="rb-random-ads ads-styled" data-frequency="33">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 8 - Frequency 33%
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 AdShuffle - Developed by <a href="https://github.com/codions/ad-shuffle" class="underline text-blue-100 hover:text-white">Codions</a></p>
         </div>
-        <div class="rb-random-ads ads-styled" data-frequency="33">
-            <div class="ads-info">Publicidade</div>
-            Banner 7 - Frequência 33%
-        </div>
-        <div class="rb-random-ads ads-styled" data-frequency="33">
-            <div class="ads-info">Publicidade</div>
-            Banner 8 - Frequência 33%
-        </div>
-    </div>
+    </footer>
 </body>
 </html>

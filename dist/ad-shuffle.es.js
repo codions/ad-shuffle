@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const ads = adsContainer.querySelectorAll(".rb-random-ads");
     const weightedAds = [];
     let totalWeight = 0;
+    const autoRotate = adsContainer.getAttribute("data-auto-rotate") === "true";
+    const interval = parseInt(adsContainer.getAttribute("data-interval") || "0", 10) * 1e3;
     ads.forEach((ad) => {
       const startDate = ad.getAttribute("data-start-date") ? new Date(ad.getAttribute("data-start-date")) : null;
       const endDate = ad.getAttribute("data-end-date") ? new Date(ad.getAttribute("data-end-date")) : null;
@@ -23,11 +25,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (weightedAds.length === 0) {
       return;
     }
-    const randomIndex = Math.floor(Math.random() * totalWeight);
-    const selectedAd = weightedAds[randomIndex];
-    ads.forEach((ad) => {
-      ad.style.display = "none";
-    });
-    selectedAd.style.display = "block";
+    const selectRandomAd = () => {
+      const randomIndex = Math.floor(Math.random() * totalWeight);
+      const selectedAd = weightedAds[randomIndex];
+      ads.forEach((ad) => {
+        ad.style.display = "none";
+      });
+      selectedAd.style.display = "block";
+    };
+    selectRandomAd();
+    if (autoRotate && interval > 0) {
+      setInterval(selectRandomAd, interval);
+    }
   });
 });
