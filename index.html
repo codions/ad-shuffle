@@ -40,35 +40,57 @@
             </button>
         </div>
 
-        <!-- Example with Auto-Rotation -->
         <section class="mb-8">
-            <h3 class="text-xl font-semibold">Example 1: Auto-Rotation Every 5 Seconds</h3>
-            <p class="mb-4">This container rotates banners automatically every 5 seconds, respecting the defined frequencies and date ranges.</p>
+            <h3 class="text-xl font-semibold">Example 1: Sequential Auto-Rotation Every 3 Seconds</h3>
+            <p class="mb-4">This container rotates banners automatically every 3 seconds, in sequential order.</p>
             <div class="bg-white p-4 shadow-md rounded-lg">
-                <div class="rb-ads" data-auto-rotate="true" data-interval="5">
-                    <div class="rb-random-ads ads-styled" data-frequency="50" data-start-date="2024-09-09 09:31:00" data-end-date="2026-10-10 12:35:00">
+                <div class="rb-ads" data-auto-rotate="true" data-interval="3" data-sequential="true">
+                    <div class="rb-random-ads ads-styled">
                         <div class="ads-info">Advertisement</div>
-                        Banner 1 - Frequency 50% (2024-09-09 to 2026-10-10)
+                        Banner 1
                     </div>
-                    <div class="rb-random-ads ads-styled" data-frequency="25" data-end-date="2026-09-09 13:00:00">
+                    <div class="rb-random-ads ads-styled">
                         <div class="ads-info">Advertisement</div>
-                        Banner 2 - Frequency 25% (Ends 2026-09-09)
+                        Banner 2
                     </div>
-                    <div class="rb-random-ads ads-styled" data-frequency="25" data-start-date="2024-09-01 00:00:00">
+                    <div class="rb-random-ads ads-styled">
                         <div class="ads-info">Advertisement</div>
-                        Banner 3 - Frequency 25% (Starts 2024-09-01)
+                        Banner 3
                     </div>
                 </div>
             </div>
         </section>
 
+        <section class="mb-8">
+            <h3 class="text-xl font-semibold">Example 2: Random Auto-Rotation Every 5 Seconds</h3>
+            <p class="mb-4">This container rotates banners automatically every 5 seconds, with random selection.</p>
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <div class="rb-ads" data-auto-rotate="true" data-interval="5">
+                    <div class="rb-random-ads ads-styled" data-frequency="50">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 1 (50% Frequency)
+                    </div>
+                    <div class="rb-random-ads ads-styled" data-frequency="30">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 2 (30% Frequency)
+                    </div>
+                    <div class="rb-random-ads ads-styled" data-frequency="20">
+                        <div class="ads-info">Advertisement</div>
+                        Banner 3 (20% Frequency)
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+
         <!-- Example without Auto-Rotation -->
         <section class="mb-8">
-            <h3 class="text-xl font-semibold">Example 2: No Auto-Rotation (Random Initial Selection)</h3>
+            <h3 class="text-xl font-semibold">Example 3: No Auto-Rotation (Random Initial Selection)</h3>
             <p class="mb-4">This container selects a random banner initially, based on the defined frequencies, but does not rotate automatically.</p>
             <div class="bg-white p-4 shadow-md rounded-lg">
                 <div class="rb-ads">
-                    <div class="rb-random-ads ads-styled" data-frequency="25" data-start-date="2024-09-10 00:00:00">
+                    <div class="rb-random-ads ads-styled" data-frequency="25" data-start-date="2024-09-10 00:00:00" data-end-date="2025-10-10 12:35:00">
                         <div class="ads-info">Advertisement</div>
                         Banner 4 - Frequency 25% (Starts 2024-09-10)
                     </div>
@@ -82,7 +104,7 @@
 
         <!-- Example with Equal Frequencies -->
         <section class="mb-8">
-            <h3 class="text-xl font-semibold">Example 3: Equal Frequencies</h3>
+            <h3 class="text-xl font-semibold">Example 4: Equal Frequencies</h3>
             <p class="mb-4">This container displays banners with equal frequencies (33%).</p>
             <div class="bg-white p-4 shadow-md rounded-lg">
                 <div class="rb-ads">

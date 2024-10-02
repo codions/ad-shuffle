@@ -41,46 +41,78 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!adsHidden) {
         adsContainers.forEach(adsContainer => {
             const ads = adsContainer.querySelectorAll<HTMLElement>('.rb-random-ads');
-            const weightedAds: HTMLElement[] = [];
-            let totalWeight = 0;
-
             const autoRotate = adsContainer.getAttribute('data-auto-rotate') === 'true';
             const interval = parseInt(adsContainer.getAttribute('data-interval') || '0', 10) * 1000;
+            const isSequential = adsContainer.getAttribute('data-sequential') === 'true';  // Check for sequential rotation
 
-            ads.forEach(ad => {
-                const startDate = ad.getAttribute('data-start-date') ? new Date(ad.getAttribute('data-start-date')!) : null;
-                const endDate = ad.getAttribute('data-end-date') ? new Date(ad.getAttribute('data-end-date')!) : null;
+            if (isSequential) {
+                // Sequential rotation logic
+                let currentIndex = 0;
+                const totalAds = ads.length;
 
-                if ((startDate && new Date() < startDate) || (endDate && new Date() > endDate)) {
-                    return;
+                const rotateAdsSequentially = () => {
+                    // Hide all ads
+                    ads.forEach(ad => {
+                        ad.style.display = 'none';
+                    });
+
+                    // Show the current ad
+                    ads[currentIndex].style.display = 'block';
+
+                    // Move to the next ad in sequence
+                    currentIndex = (currentIndex + 1) % totalAds; // Wrap around when reaching the end
+                };
+
+                // Initially show the first ad
+                rotateAdsSequentially();
+
+                // If auto-rotation is enabled, set up the interval
+                if (autoRotate && interval > 0) {
+                    setInterval(rotateAdsSequentially, interval);
                 }
-
-                const frequency = parseInt(ad.getAttribute('data-frequency')!) || 1;
-                totalWeight += frequency;
-                for (let i = 0; i < frequency; i++) {
-                    weightedAds.push(ad);
-                }
-            });
-
-            if (weightedAds.length === 0) {
-                return;
-            }
-
-            const selectRandomAd = () => {
-                const randomIndex = Math.floor(Math.random() * totalWeight);
-                const selectedAd = weightedAds[randomIndex];
+            } else {
+                // Random rotation logic
+                const weightedAds: HTMLElement[] = [];
+                let totalWeight = 0;
 
                 ads.forEach(ad => {
-                    ad.style.display = 'none';
+                    const startDate = ad.getAttribute('data-start-date') ? new Date(ad.getAttribute('data-start-date')!) : null;
+                    const endDate = ad.getAttribute('data-end-date') ? new Date(ad.getAttribute('data-end-date')!) : null;
+
+                    if ((startDate && new Date() < startDate) || (endDate && new Date() > endDate)) {
+                        return; // Skip this ad if it's outside the valid date range
+                    }
+
+                    const frequency = parseInt(ad.getAttribute('data-frequency')!) || 1;
+                    totalWeight += frequency;
+                    for (let i = 0; i < frequency; i++) {
+                        weightedAds.push(ad);
+                    }
                 });
 
-                selectedAd.style.display = 'block';
-            };
+                if (weightedAds.length === 0) {
+                    return; // No ads to display
+                }
 
-            selectRandomAd();
+                const selectRandomAd = () => {
+                    const randomIndex = Math.floor(Math.random() * totalWeight);
+                    const selectedAd = weightedAds[randomIndex];
 
-            if (autoRotate && interval > 0) {
-                setInterval(selectRandomAd, interval);
+                    // Hide all ads and display the selected one
+                    ads.forEach(ad => {
+                        ad.style.display = 'none';
+                    });
+
+                    selectedAd.style.display = 'block';
+                };
+
+                // Initially display a random ad
+                selectRandomAd();
+
+                // If auto-rotation is enabled, set up the interval
+                if (autoRotate && interval > 0) {
+                    setInterval(selectRandomAd, interval);
+                }
             }
         });
     }

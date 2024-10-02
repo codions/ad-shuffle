@@ -1,25 +1,16 @@
 # AdShuffle
 
-This JavaScript package allows for random rotation of banners on a webpage based on configured frequency, start, and end dates, with optional automatic rotation.
+This JavaScript package allows for both random and sequential rotation of banners on a webpage based on configured frequency, start, and end dates, with optional automatic rotation.
 
 ## Features
 
 - Randomly rotates banners based on frequency.
+- Sequential banner rotation when specified.
 - Control display with start and end dates.
 - Manage multiple banner containers on the same page.
 - Easily integrates into HTML via the generated library.
 - Automatically applies default styles when using the `ads-styled` class.
 - Option to automatically rotate banners at a set interval.
-
-## Installation
-
-### Installation via NPM (for development)
-
-If you want to develop or customize the package:
-
-1. Clone the repository.
-2. Install dependencies with `npm install`.
-3. Build the package with `npm run build`.
 
 ### Usage of Compiled Version
 
@@ -109,10 +100,37 @@ Example usage:
 
 In this example, banners will rotate automatically every 5 seconds.
 
-### NPM Scripts
+### Sequential Rotation
 
-- `npm run dev`: Runs the development environment with Vite.
-- `npm run build`: Builds the project for production.
+If you prefer to rotate banners in sequential order (rather than randomly), add the `data-sequential="true"` attribute to the `.rb-ads` container:
+
+```html
+<div class="rb-ads" data-auto-rotate="true" data-interval="3" data-sequential="true">
+    <div class="rb-random-ads ads-styled">
+        <div class="ads-info">Advertisement</div>
+        Banner 1
+    </div>
+    <div class="rb-random-ads ads-styled">
+        <div class="ads-info">Advertisement</div>
+        Banner 2
+    </div>
+    <div class="rb-random-ads ads-styled">
+        <div class="ads-info">Advertisement</div>
+        Banner 3
+    </div>
+</div>
+```
+
+In this example, banners will rotate sequentially every 3 seconds.
+
+
+### Installation via NPM (for development)
+
+If you want to develop or customize the package:
+
+1. Clone the repository.
+2. Install dependencies with `npm install`.
+3. Build the package with `npm run build`.
 
 ## License
 
