@@ -1,5 +1,5 @@
 {
-  "name": "random-banner",
+  "name": "ad-shuffle",
   "version": "1.0.0",
   "description": "Banner rotation script",
   "main": "dist/index.js",

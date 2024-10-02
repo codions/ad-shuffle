@@ -8,7 +8,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'MyBannerRotation',
-      fileName: (format) => `random-banner.${format}.js`
+      fileName: (format) => `ad-shuffle.${format}.js`
     },
     rollupOptions: {
       output: {
