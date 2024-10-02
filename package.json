@@ -8,10 +8,10 @@
     "dev": "vite",
     "build": "vite build"
   },
-  "dependencies": {},
   "devDependencies": {
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.35.1",
     "typescript": "^4.5.4",
-    "vite": "^2.9.18",
-    "sass": "^1.35.1"
+    "vite": "^5.4.8"
   }
 }
