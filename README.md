@@ -58,11 +58,11 @@ Add the `ads-styled` class to your banner to apply the default styles provided b
     <div class="rb-ads">
         <div class="rb-random-ads ads-styled" data-frequency="75">
             <div class="ads-info">Advertisement</div>
-            Banner 5 - Frequency 75%
+            Banner 1 - Frequency 75%
         </div>
         <div class="rb-random-ads ads-styled" data-frequency="25" data-start-date="2024-09-10 00:00:00">
             <div class="ads-info">Advertisement</div>
-            Banner 4 - Frequency 25%
+            Banner 2 - Frequency 25%
         </div>
     </div>
 </body>
