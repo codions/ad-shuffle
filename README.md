@@ -22,10 +22,10 @@ Se você deseja desenvolver ou customizar o pacote:
 
 ### Uso da Versão Compilada
 
-Se você deseja apenas utilizar o pacote compilado, adicione o arquivo gerado `dist/ad-shuffle.es.js` à sua página HTML:
+Se você deseja apenas utilizar o pacote compilado, adicione o arquivo gerado `https://ad-shuffle.codions.dev/dist/ad-shuffle.es.js` à sua página HTML:
 
 ```html
-<script src="dist/ad-shuffle.es.js"></script>
+<script src="https://ad-shuffle.codions.dev/dist/ad-shuffle.es.js"></script>
 ```
 
 ## Como Usar
@@ -43,7 +43,7 @@ Adicione a classe `ads-styled` ao seu banner para aplicar o estilo padrão do pa
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rotação de Banners</title>
-    <script src="dist/ad-shuffle.es.js"></script>
+    <script src="https://ad-shuffle.codions.dev/dist/ad-shuffle.es.js"></script>
 </head>
 <body>
     <div class="rb-ads">
