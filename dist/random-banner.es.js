@@ -1,9 +1,11 @@
+const style = document.createElement('style'); style.textContent = `.rb-random-ads{background-image:url(images/vectorline.jpg);background-position:center center;background-repeat:repeat;background-size:13%;height:auto!important;width:100%;text-align:center;font-family:sans-serif;margin-top:1.25rem;border:1px solid #f3f4f6;padding:.5rem;border-radius:.75rem;display:none}.rb-random-ads .ads-info{font-size:.875rem;color:#4b5563;margin-bottom:.5rem}
+`; document.head.appendChild(style);
 var styles = "";
 document.addEventListener("DOMContentLoaded", () => {
-  const adsContainers = document.querySelectorAll(".codions-ads");
+  const adsContainers = document.querySelectorAll(".rb-ads");
   const currentDateTime = new Date();
   adsContainers.forEach((adsContainer) => {
-    const ads = adsContainer.querySelectorAll(".codions-random-ads");
+    const ads = adsContainer.querySelectorAll(".rb-random-ads");
     const weightedAds = [];
     let totalWeight = 0;
     ads.forEach((ad) => {

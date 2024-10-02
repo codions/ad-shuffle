@@ -1,11 +1,11 @@
 import './styles.scss';
 
 document.addEventListener("DOMContentLoaded", () => {
-    const adsContainers = document.querySelectorAll('.codions-ads');
+    const adsContainers = document.querySelectorAll('.rb-ads');
     const currentDateTime = new Date();
 
     adsContainers.forEach(adsContainer => {
-        const ads = adsContainer.querySelectorAll<HTMLElement>('.codions-random-ads');
+        const ads = adsContainer.querySelectorAll<HTMLElement>('.rb-random-ads');
         const weightedAds: HTMLElement[] = [];
         let totalWeight = 0;
 
