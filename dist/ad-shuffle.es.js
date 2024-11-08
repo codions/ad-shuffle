@@ -1,41 +1,70 @@
 const style = document.createElement('style'); style.textContent = `.ads-styled{background-image:url(https://ad-shuffle.codions.dev/images/vectorline.jpg);background-position:center center;background-repeat:repeat;background-size:13%;height:auto!important;width:100%;text-align:center;font-family:sans-serif;margin-top:1.25rem;border:1px solid #f3f4f6;padding:.5rem;border-radius:.75rem;display:none}.rb-random-ads .ads-info{font-size:.875rem;color:#4b5563;margin-bottom:.5rem}
 `; document.head.appendChild(style);
-document.addEventListener("DOMContentLoaded", () => {
-  const u = document.querySelectorAll(".rb-ads"), d = document.getElementById("ads-toggle-button"), i = localStorage.getItem("ads-hidden") === "true", g = (t) => {
-    u.forEach((a) => {
-      a.style.display = t ? "none" : "block";
+var A = Object.defineProperty;
+var y = (i, t, e) => t in i ? A(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
+var c = (i, t, e) => y(i, typeof t != "symbol" ? t + "" : t, e);
+class h {
+  constructor() {
+    c(this, "adsContainers");
+    c(this, "toggleButton");
+    this.adsContainers = document.querySelectorAll(".rb-ads"), this.toggleButton = document.getElementById("ads-toggle-button"), this.initializeAds();
+  }
+  initializeAds() {
+    const t = this.areAdsHidden();
+    this.updateAdsVisibility(t), this.toggleButton && (this.toggleButton.textContent = t ? "Show Ads" : "Hide Ads", this.toggleButton.addEventListener("click", () => this.toggleAds())), t || this.initializeRotationLogic();
+  }
+  areAdsHidden() {
+    return localStorage.getItem("ads-hidden") === "true";
+  }
+  updateAdsVisibility(t) {
+    this.adsContainers.forEach((e) => {
+      e.style.display = t ? "none" : "block";
     });
-  };
-  d && (d.textContent = i ? "Show Ads" : "Hide Ads"), g(i), d == null || d.addEventListener("click", () => {
-    const t = localStorage.getItem("ads-hidden") !== "true";
-    localStorage.setItem("ads-hidden", String(t)), g(t), d.textContent = t ? "Show Ads" : "Hide Ads";
-  }), i || u.forEach((t) => {
-    const a = t.querySelectorAll(".rb-random-ads"), h = t.getAttribute("data-auto-rotate") === "true", r = 1e3 * parseInt(t.getAttribute("data-interval") || "0", 10);
-    if (t.getAttribute("data-sequential") === "true") {
-      let n = 0;
-      const l = a.length, o = () => {
-        a.forEach((e) => {
-          e.style.display = "none";
-        }), a[n].style.display = "block", n = (n + 1) % l;
-      };
-      o(), h && r > 0 && setInterval(o, r);
-    } else {
-      const n = [];
-      let l = 0;
-      if (a.forEach((e) => {
-        const s = e.getAttribute("data-start-date") ? new Date(e.getAttribute("data-start-date")) : null, c = e.getAttribute("data-end-date") ? new Date(e.getAttribute("data-end-date")) : null;
-        if (s && /* @__PURE__ */ new Date() < s || c && /* @__PURE__ */ new Date() > c) return;
-        const b = parseInt(e.getAttribute("data-frequency")) || 1;
-        l += b;
-        for (let y = 0; y < b; y++) n.push(e);
-      }), n.length === 0) return;
-      const o = () => {
-        const e = Math.floor(Math.random() * l), s = n[e];
-        a.forEach((c) => {
-          c.style.display = "none";
-        }), s.style.display = "block";
-      };
-      o(), h && r > 0 && setInterval(o, r);
+  }
+  toggleAds() {
+    const t = !this.areAdsHidden();
+    localStorage.setItem("ads-hidden", String(t)), this.updateAdsVisibility(t), this.toggleButton && (this.toggleButton.textContent = t ? "Show Ads" : "Hide Ads");
+  }
+  initializeRotationLogic() {
+    this.adsContainers.forEach((t) => {
+      const e = t.querySelectorAll(".rb-random-ads"), o = t.getAttribute("data-auto-rotate") === "true", n = 1e3 * parseInt(t.getAttribute("data-interval") || "0", 10);
+      t.getAttribute("data-sequential") === "true" ? this.rotateSequentially(e, n, o) : this.rotateRandomly(e, n, o);
+    });
+  }
+  rotateSequentially(t, e, o) {
+    let n = 0;
+    const s = t.length, d = () => {
+      t.forEach((a) => a.style.display = "none"), t[n].style.display = "block", n = (n + 1) % s;
+    };
+    d(), o && e > 0 && setInterval(d, e);
+  }
+  rotateRandomly(t, e, o) {
+    const n = [];
+    let s = 0;
+    if (t.forEach((a) => {
+      const r = a.getAttribute("data-start-date") ? new Date(a.getAttribute("data-start-date")) : null, l = a.getAttribute("data-end-date") ? new Date(a.getAttribute("data-end-date")) : null;
+      if (r && /* @__PURE__ */ new Date() < r || l && /* @__PURE__ */ new Date() > l) return;
+      const u = parseInt(a.getAttribute("data-frequency")) || 1;
+      s += u;
+      for (let g = 0; g < u; g++) n.push(a);
+    }), n.length === 0) return;
+    const d = () => {
+      const a = Math.floor(Math.random() * s), r = n[a];
+      t.forEach((l) => l.style.display = "none"), r.style.display = "block";
+    };
+    d(), o && e > 0 && setInterval(d, e);
+  }
+  static async loadAdZone(t, e) {
+    const o = document.getElementById(t);
+    if (o) try {
+      const n = await fetch(e), s = await n.text();
+      o.innerHTML = s;
+    } catch (n) {
+      console.error(`Error loading ad content for zone ${t}:`, n);
     }
-  });
-});
+    else console.warn(`Ad container with ID ${t} not found`);
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  new h();
+}), window.AdManager = h;

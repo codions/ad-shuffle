@@ -40,6 +40,7 @@
             </button>
         </div>
 
+        <!-- Example 1: Sequential Auto-Rotation -->
         <section class="mb-8">
             <h3 class="text-xl font-semibold">Example 1: Sequential Auto-Rotation Every 3 Seconds</h3>
             <p class="mb-4">This container rotates banners automatically every 3 seconds, in sequential order.</p>
@@ -61,6 +62,7 @@
             </div>
         </section>
 
+        <!-- Example 2: Random Auto-Rotation -->
         <section class="mb-8">
             <h3 class="text-xl font-semibold">Example 2: Random Auto-Rotation Every 5 Seconds</h3>
             <p class="mb-4">This container rotates banners automatically every 5 seconds, with random selection.</p>
@@ -81,10 +83,8 @@
                 </div>
             </div>
         </section>
-        
-        
 
-        <!-- Example without Auto-Rotation -->
+        <!-- Example 3: No Auto-Rotation -->
         <section class="mb-8">
             <h3 class="text-xl font-semibold">Example 3: No Auto-Rotation (Random Initial Selection)</h3>
             <p class="mb-4">This container selects a random banner initially, based on the defined frequencies, but does not rotate automatically.</p>
@@ -102,7 +102,7 @@
             </div>
         </section>
 
-        <!-- Example with Equal Frequencies -->
+        <!-- Example 4: Equal Frequencies -->
         <section class="mb-8">
             <h3 class="text-xl font-semibold">Example 4: Equal Frequencies</h3>
             <p class="mb-4">This container displays banners with equal frequencies (33%).</p>
@@ -122,6 +122,21 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Example 5: Dynamic Ad Zone Loaded from Endpoint -->
+        <section class="mb-8">
+            <h3 class="text-xl font-semibold">Example 5: Dynamic Ad Zone Loaded from Endpoint</h3>
+            <p class="mb-4">This example demonstrates how to use the AdShuffle SDK to load an ad dynamically from an external endpoint. The ad content is fetched and displayed within the specified container.</p>
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <div id="ADZONE1">Loading ad...</div>
+            </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    // Carrega um anúncio de uma rota do Cloudflare Worker usando o método auxiliar do AdManager
+                    AdManager.loadAdZone('ADZONE1', 'https://ad-flux.codions.workers.dev/ad/serve?z=ADZONE1');
+                });
+            </script>
         </section>
     </main>
 
