@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdShuffle - Demo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <script src="dist/ad-shuffle.es.js?v=2"></script>
+    <script src="dist/ad-shuffle.es.js?v=2024-11-08-1924"></script>
+    <script>            
+        window.selectedEditor = AdManager.selectEditorByFrequency([['editor-1',80],['editor-2',20]]);
+    </script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
     <header class="bg-blue-600 text-white py-6">
@@ -134,10 +137,19 @@
                         <div class="ads-info">Advertisement</div>
                         <div id="ADZONE1">Loading ad...</div>
                         <script>
+                            AdManager.loadAdZone('ADZONE1', `http://localhost:8787/ad/serve?z=ADZONE1&editor=${window.selectedEditor}`);
+                        </script>
+                    </div>
+                </div>
+
+                <div class="rb-ads">
+                    <div class="rb-random-ads ads-styled">
+                        <div class="ads-info">Advertisement</div>
+                        <div id="ADZONE2">Loading ad...</div>
+                        <script>
                             document.addEventListener("DOMContentLoaded", () => {
-                                // Carrega um anúncio de uma rota do Cloudflare Worker usando o método auxiliar do AdManager
-                                AdManager.loadAdZone('ADZONE1', 'https://ad-flux.codions.dev/ad/serve?z=ADZONE1');
-                            });
+                                AdManager.loadAdZone('ADZONE2', `http://localhost:8787/ad/serve?z=ADZONE2&editor=${window.selectedEditor}`);
+                            });                            
                         </script>
                     </div>
                 </div>

@@ -136,6 +136,22 @@ class AdManager {
         }
     }
 
+    // Método para selecionar um editor com base na frequência e retornar o selecionado
+    public static selectEditorByFrequency(editors: [string, number][]): string {
+        const totalWeight = editors.reduce((sum, [_, frequency]) => sum + frequency, 0);
+        let randomValue = Math.random() * totalWeight;
+
+        for (const [id, frequency] of editors) {
+            if (randomValue < frequency) {
+                return id;
+            }
+            randomValue -= frequency;
+        }
+
+        // Fallback de segurança
+        return editors[0][0];
+    }
+
     // Método para carregar anúncios de um endpoint e injetar de forma segura
     public static async loadAdZone(zoneId: string, endpoint: string): Promise<void> {
         const adContainer = document.getElementById(zoneId);
