@@ -1,5 +1,25 @@
 import './styles.scss';
 
+// Função auxiliar para injetar HTML com execução de scripts
+function amb_sH(container: HTMLElement, content: string, clear: boolean = true): void {
+    if (clear) container.innerHTML = "";
+    const tempContainer = document.createElement("div");
+    tempContainer.innerHTML = content;
+
+    Array.from(tempContainer.children).forEach(child => {
+        const element = document.createElement(child.nodeName);
+        Array.from(child.attributes).forEach(attr => {
+            element.setAttribute(attr.nodeName, attr.nodeValue);
+        });
+        if (child.nodeName === "SCRIPT" && child.text) {
+            element.text = child.text; // Executa scripts embutidos
+        } else if (child.innerHTML) {
+            element.innerHTML = child.innerHTML;
+        }
+        container.appendChild(element);
+    });
+}
+
 // Definição da classe principal com métodos auxiliares
 class AdManager {
     private adsContainers: NodeListOf<HTMLElement>;
@@ -116,7 +136,7 @@ class AdManager {
         }
     }
 
-    // Novo método auxiliar para carregar anúncios de um endpoint
+    // Método para carregar anúncios de um endpoint e injetar de forma segura
     public static async loadAdZone(zoneId: string, endpoint: string): Promise<void> {
         const adContainer = document.getElementById(zoneId);
         if (!adContainer) {
@@ -126,8 +146,12 @@ class AdManager {
 
         try {
             const response = await fetch(endpoint);
+            if (!response.ok) {
+                throw new Error(`Failed to load ad for zone ${zoneId}: ${response.statusText}`);
+            }
+
             const adContent = await response.text();
-            adContainer.innerHTML = adContent;
+            amb_sH(adContainer, adContent, true); // Injetar o conteúdo de forma segura com execução de scripts
         } catch (error) {
             console.error(`Error loading ad content for zone ${zoneId}:`, error);
         }
@@ -140,4 +164,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Adiciona o `AdManager` ao escopo global para métodos auxiliares
-window.AdManager = AdManager;
+(window as any).AdManager = AdManager;
